@@ -55,6 +55,7 @@ let startTime;
 
 let openCards = [];
 const resetButton = document.querySelector('.restart');
+let allCards = document.querySelectorAll('.card');
 
 //setup game
 function initGame(){
@@ -66,7 +67,7 @@ function initGame(){
       moveCounter.innerHTML = 0;
       startTime = new Date()
 
-const allCards = document.querySelectorAll('.card');
+      allCards = document.querySelectorAll('.card');
       allCards.forEach((card) => {
           card.addEventListener('click', () => {
             if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
@@ -131,14 +132,9 @@ const incrementCounter = () => {
 
 initGame();
 
-
-
-
 resetButton.addEventListener('click', () => {
   initGame();
 });
-
-
 
 const checkWin = () => {
   let isWin = true
