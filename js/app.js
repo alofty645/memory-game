@@ -57,6 +57,7 @@ let openCards = [];
 const resetButton = document.querySelector('.restart');
 let allCards = document.querySelectorAll('.card');
 
+
 //setup game
 function initGame(){
       const deck = document.querySelector('.deck');
@@ -79,13 +80,9 @@ function initGame(){
                 incrementCounter()
                 //check match
                 if (openCards[0].dataset.card === openCards[1].dataset.card){
-                    openCards[0].classList.add('match');
-                    openCards[0].classList.add('open');
-                    openCards[0].classList.add('show');
+                    openCards[0].classList.add('match','open', 'show');
 
-                    openCards[1].classList.add('match');
-                    openCards[1].classList.add('open');
-                    openCards[1].classList.add('show');
+                    openCards[1].classList.add('match','open', 'show');
 
                     openCards = [];
                       setTimeout(() => {
@@ -115,12 +112,8 @@ function initGame(){
 
               }, 500);
              }
-
-             }
-
-
+            }
           }
-
         });
       });
 }
@@ -128,7 +121,18 @@ function initGame(){
 const incrementCounter = () => {
     const countInt = parseInt(moveCounter.innerHTML)
     moveCounter.innerHTML = countInt+1;
-}
+    if (countInt >= 10){
+      document.getElementById("star-1").classList.add("hidden");
+    }
+    if (countInt >= 20) {
+        document.getElementById("star-2").classList.add("hidden");
+      }
+    if (countInt >= 30) {
+        document.getElementById("star-3").classList.add("hidden");
+    }
+  }
+
+
 
 initGame();
 
