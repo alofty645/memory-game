@@ -69,6 +69,7 @@ let allCards = document.querySelectorAll(".card");
 
 //setup game
 function initGame() {
+	openCards = [];
 	const deck = document.querySelector(".deck");
 	const cardHTML = shuffle(cards).map(function(card) {
 		return generateCard(card);
@@ -105,8 +106,6 @@ function initGame() {
 								// compare the two
 								const diffTime = finishTime - startTime;
 
-								console.log(Math.round(diffTime / 1000));
-
 								let resetGame = window.confirm(
 									`You win! That took you ${Math.round(
 										diffTime / 1000
@@ -114,6 +113,9 @@ function initGame() {
 								);
 								if (resetGame) {
 									initGame();
+									document
+										.getElementById("star-1", "star-2", "star-3")
+										.classList.remove("hidden");
 								}
 							}
 						}, 500);
@@ -132,6 +134,8 @@ function initGame() {
 	});
 }
 
+initGame();
+
 const incrementCounter = () => {
 	const countInt = parseInt(moveCounter.innerHTML);
 	moveCounter.innerHTML = countInt + 1;
@@ -145,8 +149,6 @@ const incrementCounter = () => {
 		document.getElementById("star-3").classList.add("hidden");
 	}
 };
-
-initGame();
 
 resetButton.addEventListener("click", () => {
 	initGame();
