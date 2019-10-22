@@ -66,10 +66,10 @@ let startTime;
 let openCards = [];
 const resetButton = document.querySelector(".restart");
 let allCards = document.querySelectorAll(".card");
+let timeCounter = 0;
 
 //setup game
 function initGame() {
-	openCards = [];
 	const deck = document.querySelector(".deck");
 	const cardHTML = shuffle(cards).map(function(card) {
 		return generateCard(card);
@@ -109,10 +109,12 @@ function initGame() {
 								let resetGame = window.confirm(
 									`You win! That took you ${Math.round(
 										diffTime / 1000
-									)} seconds. Do you want to play again?`
+									)} seconds and you have ${numberOfStars} stars left! Do you want to play again?`
 								);
+								//reset
 								if (resetGame) {
 									initGame();
+									clearInterval(gameTimer);
 									document
 										.getElementById("star-1", "star-2", "star-3")
 										.classList.remove("hidden");
@@ -133,25 +135,43 @@ function initGame() {
 		});
 	});
 }
+//timer
+const secondsCounter = document.querySelector(".time");
+let timeInt = parseInt(secondsCounter.innerHTML);
+let gameTimer = setInterval(() => {
+	secondsCounter.innerHTML = timeInt += 1;
+	console.log(timeInt);
+}, 1000);
 
 initGame();
+
+let numberOfStars = 3;
 
 const incrementCounter = () => {
 	const countInt = parseInt(moveCounter.innerHTML);
 	moveCounter.innerHTML = countInt + 1;
 	if (countInt >= 10) {
 		document.getElementById("star-1").classList.add("hidden");
+		numberOfStars = 2;
 	}
 	if (countInt >= 20) {
 		document.getElementById("star-2").classList.add("hidden");
+		numberOfStars = 1;
 	}
 	if (countInt >= 30) {
 		document.getElementById("star-3").classList.add("hidden");
+		numberOfStars = 0;
 	}
 };
 
 resetButton.addEventListener("click", () => {
 	initGame();
+	timeCounter = 0;
+	secondsCounter = 0;
+	openCards = [];
+	document
+		.getElementById("star-1", "star-2", "star-3")
+		.classList.remove("hidden");
 });
 
 const checkWin = () => {
