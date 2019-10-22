@@ -75,6 +75,7 @@ function initGame() {
 		return generateCard(card);
 	});
 	deck.innerHTML = cardHTML.join("");
+	timeCounter.innerHTML = 0;
 	moveCounter.innerHTML = 0;
 	startTime = new Date();
 
@@ -113,8 +114,10 @@ function initGame() {
 								);
 								//reset
 								if (resetGame) {
+									timeInt = 0;
+									openCards = [];
 									initGame();
-									clearInterval(gameTimer);
+
 									document
 										.getElementById("star-1", "star-2", "star-3")
 										.classList.remove("hidden");
@@ -165,10 +168,10 @@ const incrementCounter = () => {
 };
 
 resetButton.addEventListener("click", () => {
-	initGame();
-	timeCounter = 0;
-	secondsCounter = 0;
+	timeInt = 0;
 	openCards = [];
+	initGame();
+
 	document
 		.getElementById("star-1", "star-2", "star-3")
 		.classList.remove("hidden");
