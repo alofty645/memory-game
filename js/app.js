@@ -32,7 +32,7 @@ function generateCard(card) {
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+
 function shuffle(array) {
 	let currentIndex = array.length,
 		temporaryValue,
